@@ -26,8 +26,3 @@ def judge():
             print('success!')
 
 judge()
-
-# input 단위로 다음 줄을 읽음
-# input() 1번줄 => input() 2번줄
-
-# %d
