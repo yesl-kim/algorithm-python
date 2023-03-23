@@ -2,7 +2,7 @@ import sys
 import answer
 
 case_num = 5
-path="/Users/kimyeseul/dev/algorithm/algorithm-python/ignore/pythonalgorithm_formac/섹션 2/8. 뒤집은 소수"
+path="/Users/kimyeseul/dev/algorithm/algorithm-python/ignore/pythonalgorithm_formac/섹션 2/10. 점수 계산"
 
 def judge():
     for i in range(case_num):
