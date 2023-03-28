@@ -1,10 +1,13 @@
 import sys
+import time
 import answer
+import answer2
 
 case_num = 5
 path="/Users/kimyeseul/dev/algorithm/algorithm-python/ignore/pythonalgorithm_formac/섹션 3/6. 격자판 최대합"
 
 def judge():
+    start = time.time()
     for i in range(case_num):
         num = i+1
         input_path=path + "/in" + str(num) + ".txt"
@@ -14,8 +17,9 @@ def judge():
         sys.stdin=open(input_path, "rt")
         n=int(input())
         m=answer.makeArr(n)
+        # print(m)
         
-        a=answer.solution(n, m)
+        a=answer2.solution(n, m)
         if not a == int(output): 
                 print('answer wrong!')
                 print('input: ',num)
@@ -23,6 +27,8 @@ def judge():
                 print('expected: ', output)
                 break
     else: 
+        end=time.time()
         print('success!')
+        print(f"{end - start:.5f} sec")
 
 judge()

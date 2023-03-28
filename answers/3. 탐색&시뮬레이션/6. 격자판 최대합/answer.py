@@ -8,12 +8,10 @@ n*n 격자판
 -> 각 행의 합, 각 열의 합, 두 대각선의 합 중 가장 큰 합 출력
 '''
 
+# 0.0302 s
+
 def makeArr(n):
-    m=[]
-    for i in range(n):
-        a=[int(x) for x in input().split()]
-        m.append(a)
-    return m
+    return [[int(x) for x in input().split()] for _ in range(n)]
                 
 def solution(n, m):
     hs=[]
