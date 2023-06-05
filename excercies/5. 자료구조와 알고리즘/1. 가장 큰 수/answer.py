@@ -10,13 +10,14 @@ def solution(n, m):
     # x=len(n)-m-1
     # range(i, len(n)-x)
     while(m<len(n)):
-        temp=n[i:m+1]
-        large=max(temp)
+        large=0
+        for j in range(i, m+1):
+            if large<n[j]:
+                large=n[j]
+                i=j+1
         res.append(large)
-        i+=temp.index(large)+1
         m+=1
-    return res
-    # return "".join([str(x) for x in res])
+    return "".join([str(x) for x in res])
 
 def solution2(n, m):
     res=[]
