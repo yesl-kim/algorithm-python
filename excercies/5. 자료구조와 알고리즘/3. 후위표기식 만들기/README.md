@@ -10,4 +10,7 @@ TODO
 
 ```py
 x.isdecimal()
+x.isdigit()
+# x가 십진수 숫자이면 True
+# 아니면 False
 ```
