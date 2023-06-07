@@ -1,5 +1,7 @@
 # 응급실
 
+TODO
+
 ## TIP
 
 ### enumarate: iterable에서 요소와 인덱스를 함께 얻고 싶을 때

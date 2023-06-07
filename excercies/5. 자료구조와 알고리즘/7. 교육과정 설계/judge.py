@@ -18,7 +18,7 @@ def judge():
         N=int(input())
         for i in range(N):
             m=input().strip()
-            a=answer.solution(n,m)
+            a=answer.solution2(n,m)
             if not expecteds[i] == f"#{i+1} {a}":
                 print('answer wrong!')
                 print('input: ', num)
