@@ -16,9 +16,9 @@
 
 ### 필요 기능
 
-- heappush(heap, data)
-- heappop(heap)
-- heapify(x)
+- `heappush(heap, data)`: 힙 구조에 data 추가
+- `heappop(heap)`: 루트 요소 제거 후 반환
+- `heapify(x)`: 배열이나 이진트리를 힙 구조로 재배열
 
 ## 참고
 

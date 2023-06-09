@@ -34,15 +34,28 @@ def heappop(heap):
             break
     return root
 
-import heapq
-h = []
-arr = [21, 33, 17, 27, 9, 11, 14]
-for i in arr:
-        heappush(h, i)
+# 주어진 배열이나 이진트리를 힙 구조로 "재배열"
+def heapify(arr):
+    for i in range(len(arr)):
+        cur=len(arr)-1
+        while (cur-1)//2>=i:
+            if cur%2==0 and arr[cur]>arr[cur-1]: cur-=1
+            parent=(cur-1)//2
+            if arr[parent]>arr[cur]:
+                arr[parent],arr[cur]=arr[cur],arr[parent]
+            cur=cur-2 if cur%2==0 else cur-1
+    return arr
 
-print(h)
-while h:
-        print(heappop(h), end = " ")
 
-print()
-print(heappop(h))
+def heapify2(arr): 
+    last=len(arr)//2-1
+    for cur in range(last, -1, -1):
+        while cur<=last:
+            child=cur*2+1
+            sibling=child+1
+            if sibling<len(arr) and arr[child]>arr[sibling]: child=sibling
+            if arr[cur]>arr[child]:
+                arr[cur],arr[child]=arr[child],arr[cur]
+                cur=child
+            else:
+                break
