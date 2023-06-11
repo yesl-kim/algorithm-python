@@ -8,7 +8,7 @@ def heappush(heap, data):
     current=len(heap)-1
     while current>0:
         parent=(current-1)//2
-        if heap[parent]>heap[current]:
+        if heap[parent]<heap[current]:
             heap[parent], heap[current]=heap[current], heap[parent]
             current=parent
         else:
@@ -24,10 +24,10 @@ def heappop(heap):
     cur,lt=0,1
     while lt<len(heap):
         child,rt=lt,lt+1
-        # 자식 요소 중 더 작은 값과 값교환을 하면 됨
-        if rt<len(heap) and heap[lt]>heap[rt]:
+        # 자식 요소 중 더 큰 값과 값교환을 하면 됨
+        if rt<len(heap) and heap[lt]<heap[rt]:
             child=rt
-        if heap[cur]>heap[child]:
+        if heap[cur]<heap[child]:
             heap[child],heap[cur]=heap[cur],heap[child]
             cur,lt=child,child*2+1
         else: 
@@ -39,9 +39,9 @@ def heapify(arr):
     for i in range(len(arr)):
         cur=len(arr)-1
         while (cur-1)//2>=i:
-            if cur%2==0 and arr[cur]>arr[cur-1]: cur-=1
+            if cur%2==0 and arr[cur]<arr[cur-1]: cur-=1
             parent=(cur-1)//2
-            if arr[parent]>arr[cur]:
+            if arr[parent]<arr[cur]:
                 arr[parent],arr[cur]=arr[cur],arr[parent]
             cur=cur-2 if cur%2==0 else cur-1
     return arr
@@ -53,9 +53,17 @@ def heapify2(arr):
         while cur<=last:
             child=cur*2+1
             sibling=child+1
-            if sibling<len(arr) and arr[child]>arr[sibling]: child=sibling
-            if arr[cur]>arr[child]:
+            if sibling<len(arr) and arr[child]<arr[sibling]: child=sibling
+            if arr[cur]<arr[child]:
                 arr[cur],arr[child]=arr[child],arr[cur]
                 cur=child
             else:
                 break
+
+
+h1=[5, 3, 2, 1, 4, 6, 7]
+h2=[5, 3, 2, 1, 4, 6, 7]
+heapify2(h1)
+heapify(h2)
+print(h1)
+print(h2)
