@@ -19,7 +19,9 @@ def judge():
         while True:
             n=int(input())
             if n==-1: break
-            elif n==0: res.append(heapq.heappop(heap))
+            elif n==0: 
+                if len(heap)==0: res.append(-1)
+                else: res.append(heapq.heappop(heap))
             else: heapq.heappush(heap, n)
 
         expected=[int(x.strip()) for x in open(output_path, 'rt').readlines()]

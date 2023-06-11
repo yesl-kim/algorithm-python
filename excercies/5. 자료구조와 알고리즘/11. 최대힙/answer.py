@@ -1,3 +1,5 @@
+import heapq
+
 def max_heappush(heap, n):
     heap.append(n)
     cur=len(heap)-1
@@ -25,3 +27,7 @@ def max_heappop(heap):
         else:
             break
     return root
+
+
+
+
