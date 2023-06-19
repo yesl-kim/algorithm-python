@@ -21,8 +21,7 @@ def dfs(L=0, i=0):
     global c
     if L==k:
         s=sum(res)
-        if s>m and s%m==0:
-            c+=1
+        if s%m==0:c+=1
     else:
         for j in range(i, N):
             res[L]=n[j]
