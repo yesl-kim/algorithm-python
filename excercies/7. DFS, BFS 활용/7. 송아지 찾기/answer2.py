@@ -1,30 +1,33 @@
 import sys
 import time
+from collections import deque
 
 start=time.time()
-input_path='/Users/kimyeseul/dev/algorithm/algorithm-python/ignore/pythonalgorithm_formac/섹션 7/7. 송아지 찾기/in0.txt'
+input_path='/Users/kimyeseul/dev/algorithm/algorithm-python/ignore/pythonalgorithm_formac/섹션 7/7. 송아지 찾기/in5.txt'
 sys.stdin=open(input_path, 'rt')
 S,E=map(int, input().split())
-res=float('inf')
 
-def bfs(s=S,cnt=0):
-    global res
-    if cnt>res: return
-    if s==E:
-        if res>cnt: res=cnt
-    elif s<E:
-        if (E-s)/5>1:
-            jump=(E-s)//5
-            bfs(s+jump*5,cnt+jump)
-            bfs(s+(jump+1)*5, cnt+jump+1)
-        else:
-            jump=E-s
-            bfs(s+jump, cnt+jump)
-    else:
-        bfs(s-1,cnt+1)
-    
+MAX=10000
+jump=[0]*(MAX*2)
+ch=[0]*(MAX*2)
+ch[S]=1
 
-bfs()
-print(res)
+d=deque([])
+d.append(S)
+
+# ======
+while d:
+    now=d.popleft()
+    if now==E:
+        break
+    for next in (now+5, now+1, now-1):
+        if 0<next<=MAX and ch[next]==0:
+            d.append(next)
+            jump[next]=jump[now]+1
+            ch[next]=1
+        
+# ======
+
+print(jump[E])
 end=time.time()
 print(f"{end - start:.5f} sec")

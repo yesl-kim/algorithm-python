@@ -2,7 +2,7 @@ import sys
 import time
 
 start=time.time()
-input_path='/Users/kimyeseul/dev/algorithm/algorithm-python/ignore/pythonalgorithm_formac/섹션 7/7. 송아지 찾기/in0.txt'
+input_path='/Users/kimyeseul/dev/algorithm/algorithm-python/ignore/pythonalgorithm_formac/섹션 7/7. 송아지 찾기/in5.txt'
 sys.stdin=open(input_path, 'rt')
 S,E=map(int, input().split())
 res=float('inf')
