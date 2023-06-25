@@ -14,15 +14,6 @@ apple.append((mid, mid))
 res,g[mid][mid]=g[mid][mid],None
 L=0
 
-# while L<N:
-#     x,y=apple.popleft()
-#     for i,j in ((x+1,y),(x-1, y),(x, y+1),(x,y-1)):
-#         if 0<=i<N and 0<=j<N and g[i][j]!=None:
-#             apple.append((i,j))
-#             res+=g[i][j]
-#             g[i][j]=None
-#     L+=1
-
 while True:
     if L==mid:
         break
