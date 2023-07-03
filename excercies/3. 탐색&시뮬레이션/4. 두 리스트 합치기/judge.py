@@ -2,7 +2,7 @@ import sys
 import answer
 
 case_num = 5
-path="/Users/kimyeseul/dev/algorithm/algorithm-python/ignore/pythonalgorithm_formac/섹션 3/4. 두 리스트 합치기"
+path="/Users/yesl.k/Dev/coding_test/algorithm-python/ignore/섹션 3/4. 두 리스트 합치기"
 
 def judge():
     for i in range(case_num):
