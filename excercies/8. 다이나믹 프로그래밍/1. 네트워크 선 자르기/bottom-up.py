@@ -11,16 +11,6 @@ dy[0]=0
 dy[1]=1
 dy[2]=2
 
-
-# def dfs(L=3):
-#     if L>N:
-#         return
-#     else:
-#         dy[L]=dy[L-1]+dy[L-2]
-#         dfs(L+1)
-
-# dfs()
-
 for i in range(3,N+1):
     dy[i]=dy[i-1]+dy[i-2]
 print(dy[N])
