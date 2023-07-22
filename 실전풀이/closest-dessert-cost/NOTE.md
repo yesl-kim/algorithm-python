@@ -1,5 +1,7 @@
 # closest dessert cost
 
+> DFS
+
 ## 오답노트
 
 ### 전역변수 참조 문제
