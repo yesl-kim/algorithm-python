@@ -1,9 +1,6 @@
-import time
+# https://leetcode.com/problems/add-bold-tag-in-string/
 
-'''
-s: string
-dict: string[]
-'''
+import time
 
 def solution(s,dict):
     res=''
