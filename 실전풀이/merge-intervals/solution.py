@@ -1,17 +1,21 @@
 # https://leetcode.com/problems/merge-intervals/
-from functools import reduce
+from typing import List
 
 class Solution:
- def merge(self, intervals: List[List[int]]) -> List[List[int]]:
-     intervals.sort(key=lambda x:x[0])
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        intervals.sort(key=lambda x:x[0])
 
-     def _merge(acc, cur):
-         prev = acc[-1]
-         if prev[1] < cur[0]:
-             acc.append(cur)
-         else:
-             prev[1] = max(prev[1],cur[1])
-         return acc
+        def _merge(acc, it):
+            try:
+                prev = acc[-1]
+                cur = next(it)
+                if cur[0] <= prev[1]:
+                    prev[1] = max(prev[1], cur[1])
+                    return _merge(acc, it)
+                
+                return _merge(acc + [cur], it)
+            except:
+                return acc
 
-     intervals = iter(intervals)
-     return reduce(_merge, intervals, [next(intervals)])
+        intervals = iter(intervals)
+        return _merge([next(intervals)], intervals)
