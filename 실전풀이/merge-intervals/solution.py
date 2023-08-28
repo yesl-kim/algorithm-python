@@ -4,20 +4,20 @@ from typing import List
 class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
 
-        def _merge(prev, it):
-            try:
-                cur = next(it)
+        def _merge(intervals):
+            if len(intervals) == 1:
+                return intervals
+            else:
+                prev, cur = intervals.pop(0), intervals[0]
+
                 if prev[1] < cur[0]:
-                    return [prev] + _merge(cur, it)
+                    return [prev] + _merge(intervals)
                 
-                prev[1] = max(prev[1], cur[1])
-                return _merge(prev, it)
-            except:
-                return [prev]
+                cur[0], cur[1] = prev[0], max(prev[1], cur[1])
+                return _merge(intervals)
 
         intervals.sort(key=lambda x:x[0])
-        intervals = iter(intervals)
-        return _merge(next(intervals), intervals)
+        return _merge(intervals)
             
     
 
