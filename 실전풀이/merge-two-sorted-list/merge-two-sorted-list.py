@@ -7,30 +7,14 @@ class ListNode:
         self.next = next
 
 class Solution:
-    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
-        head = ListNode()
-        cur = head
-        node1, node2 = list1, list2
-        
-        while node1 and node2:
-            print(f"cur: {cur.val}, ", end=' ')
-            print(f"node1: {node1.val}, ", end=' ')
-            print(f"node2: {node2.val}")
-            if node1.val < node2.val:
-                cur.next = node1
-                node1 = node1.next
-            else:
-                cur.next = node2
-                node2 = node2.next
-            cur = cur.next
-        
-        if node1:
-            cur.next = node1
-        
-        if node2:
-            cur.next = node2
-        
-        return head.next
+    def mergeTwoLists(self, node1: Optional[ListNode], node2: Optional[ListNode]) -> Optional[ListNode]:
+        if not node1 and not node2:
+            return
+        if (not node1 and node2) or (node1.val > node2.val):
+            node1, node2 = node2, node1
+            
+        node1.next = self.mergeTwoLists(node1.next, node2)
+        return node1
     
 
 s = Solution()
