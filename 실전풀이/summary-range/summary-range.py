@@ -1,14 +1,25 @@
 # https://leetcode.com/problems/summary-ranges/
+# 재귀?
+
+from typing import List
 
 class Solution:
     def summaryRanges(self, nums: List[int]) -> List[str]:
-        left = 0
-        res = []
+        _range = lambda s, e: [str(nums[s]) if s == e else f"{nums[s]}->{nums[e]}"]
+        def summary(s, e):
+            if e == len(nums):
+                return _range(s, e-1)
+            
+            if nums[e]-nums[s] == e-s:
+                return summary(s, e+1)
+
+            return _range(s, e-1) + summary(e, e+1)
         
-        for i, n in enumerate(nums):
-            if i + 1 == len(nums) or n + 1 != nums[i+1]:
-                r = str(n) if left == i else f"{nums[left]}->{nums[i]}"
-                res.append(r)
-                left = i + 1
-        
-        return res
+        if not nums:
+            return nums
+        return summary(0, 1)
+    
+
+s = Solution()
+nums = [0,1,2,4,5,7]
+print(s.summaryRanges(nums))
