@@ -13,15 +13,18 @@ class Solution:
         return dp[n]
     
     def recursiveClimbStairs(self, n: int) -> int:
-        def climb(stair=0):
-            if stair > n:
-                return 0
-            if stair == n:
-                return 1
+        memo = [None] * (n+1)
+        memo[0] = 1
+        memo[1] = 1
+
+        def climb(stair):
+            if memo[stair]:
+                return memo[stair]
             
-            return climb(stair+1) + climb(stair+2)
+            memo[stair] = climb(stair-1) + climb(stair-2)
+            return memo[stair]
         
-        return climb()
+        return climb(n)
 
 
 s = Solution()
@@ -34,4 +37,5 @@ for fn in (s.climbStairs, s.recursiveClimbStairs):
     print(f"ans: {ans} ({end - start:.5f} sec)")
 
 # DP (0.00001 sec)
-# recursive (16.67712 sec)
+# recursion (9.57166 sec)
+# recursion + memo (0.00003 sec)
