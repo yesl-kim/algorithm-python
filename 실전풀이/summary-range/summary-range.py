@@ -8,15 +8,15 @@ class Solution:
             return []
         
         n = len(nums)-1
-        left = 0
+        start = 0
         res = []
+        summary = lambda e: res.append(str(nums[start]) if start == e else f"{nums[start]}->{nums[e]}")
 
         for i in range(n):
             if nums[i]+1 != nums[i+1]:
-                res.append(str(nums[i]) if left == i else f"{nums[left]}->{nums[i]}")
-                left = i+1
-
-        res.append(str(nums[n]) if left == n else f"{nums[left]}->{nums[n]}")
+                summary(i)
+                start = i+1
+        summary(n)
         
         return res
 
