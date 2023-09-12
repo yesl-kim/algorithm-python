@@ -12,8 +12,7 @@ class Solution:
                 left, right = i, i + size
                 while 0 <= left and right < n and s[left] == s[right]:
                     substring = s[left: right + 1]
-                    if len(res) < len(substring):
-                        res = substring
+                    res = max(res, substring, key=len)
                     left -= 1
                     right += 1
 
