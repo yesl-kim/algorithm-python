@@ -18,10 +18,9 @@ def solution(fees, records):
             parks[car] += (time - enters[car]).seconds // 60
             del enters[car]
     
-    if enters:
-        for car, enter in enters.items():
-            leave = dt.datetime.strptime('23:59', "%H:%M")
-            parks[car] += (leave - enter).seconds // 60
+    for car, enter in enters.items():
+        leave = dt.datetime.strptime('23:59', "%H:%M")
+        parks[car] += (leave - enter).seconds // 60
     
     # 주차요금 계산
     answer = []
