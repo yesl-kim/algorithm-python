@@ -10,8 +10,6 @@ def solution(s: str) -> List[str]:
         indices[char].append(i)
     
     # merge
-    # TODO: 재귀로 바꿔보기
-    # 더 빠른 방법 생각해보기
     ranges = sorted(indices.values(), key=lambda x: x[0])
     first = ranges.pop(0) # 🤔
     merged = [[first[0], first[-1]]]
