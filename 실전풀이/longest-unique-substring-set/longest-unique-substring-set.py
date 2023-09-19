@@ -12,11 +12,11 @@ def solution(s: str) -> List[str]:
     # merge
     ranges = sorted(indices.values(), key=lambda x: x[0])
     first = ranges.pop(0) # 🤔
-    merged = [[first[0], first[-1]]]
+    merged = [(first[0], first[-1])]
     for r in ranges:
-        prev = merged[-1]
-        if r[0] < prev[1]:
-            prev[1] = max(r[-1], prev[1])
+        start, end = merged[-1]
+        if r[0] < end:
+            merged[-1] = (start, max(r[-1], end))
         else:
             merged.append([r[0], r[-1]])
 
