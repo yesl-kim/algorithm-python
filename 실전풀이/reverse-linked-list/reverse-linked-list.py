@@ -9,20 +9,17 @@ class ListNode:
 
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        if not head or not head.next:
-            return head
+        def reverse(prev, cur):
+            if not cur:
+                return prev
+            next, cur.next = cur.next, prev
+            return reverse(cur, next)
         
-        prev = None
-        cur = head
-        
-        while cur:
-            print(f"{prev.val if prev else prev} -> {cur.val} -> {cur.next.val if cur.next else cur.next}")
-            next = cur.next
-            cur.next = prev
-            prev, cur = cur, next
-        
-        return prev
+        return reverse(None, head)
 
 s = Solution()
 head = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
-print(s.reverseList(head))
+ans = s.reverseList(head)
+while ans:
+    print(ans.val)
+    ans=ans.next
