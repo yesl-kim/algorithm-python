@@ -8,8 +8,9 @@ class Solution:
             if not s:
                 return [sentence.strip()]
 
-            return reduce(lambda sentences, word: sentences + find(s[len(word):], sentence + ' ' + word), 
-                          (word for word in wordDict if s.startswith(word)), [])
+            return sum((find(s[len(word):], sentence + ' ' + word) for word 
+                        in wordDict if s.startswith(word)), 
+                        [])
 
         return find(s)
     
