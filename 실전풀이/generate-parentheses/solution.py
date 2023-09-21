@@ -19,13 +19,12 @@ class Solution:
 
     def generateParenthesis(self, n: int) -> List[str]:
         pairs = ('((', '()', '))', ')(')
-        def generate(n, s = ''):
-            if n == 0:
-                return [s] if self.isValid(s) else []
-            else:
-                return reduce(lambda acc, p: acc + generate(n-1, s + p), pairs, [])
+        def generate(n):
+            if n == 1:
+                return pairs
+            return (p1 + p2 for p1 in pairs for p2 in generate(n-1))
 
-        return generate(n)
+        return [parenthesis for parenthesis in generate(n) if self.isValid(parenthesis)]
 
 s = Solution()
 print(s.generateParenthesis(3))
