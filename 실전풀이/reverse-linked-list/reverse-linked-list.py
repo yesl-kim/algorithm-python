@@ -9,13 +9,19 @@ class ListNode:
 
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        def reverse(prev, cur):
-            if not cur:
-                return prev
-            next, cur.next = cur.next, prev
-            return reverse(cur, next)
+        new_head = None
+        def recur(node):
+            nonlocal new_head
+            if not node.next:
+                new_head = ListNode(node.val)
+                return new_head
+            
+            next, cur = recur(node.next), ListNode(node.val)
+            next.next = cur
+            return cur
         
-        return reverse(None, head)
+        recur(head)
+        return new_head
 
 s = Solution()
 head = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
