@@ -9,22 +9,22 @@ class ListNode:
 
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        new_head = None
         def recur(node):
-            nonlocal new_head
             if not node.next:
-                new_head = ListNode(node.val)
-                return new_head
+                new_head = ListNode(0, ListNode(node.val))
+                return new_head.next, new_head
             
-            next, cur = recur(node.next), ListNode(node.val)
+            next, head = recur(node.next)
+            cur = ListNode(node.val)
             next.next = cur
-            return cur
+            return cur, head
         
-        recur(head)
-        return new_head
+        _, new_head = recur(head)
+        return new_head.next
 
 s = Solution()
-head = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
+# head = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
+head = ListNode()
 ans = s.reverseList(head)
 while ans:
     print(ans.val)
