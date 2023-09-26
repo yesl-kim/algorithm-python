@@ -1,3 +1,5 @@
+# https://leetcode.com/problems/rotting-oranges/submissions/
+
 from typing import List
 from collections import deque
 
@@ -23,3 +25,12 @@ class Solution:
                     rotten.append((m+1, xx, yy))
         
         return m if fresh == 0 else -1
+    
+
+'''
+난이도: 미디엄, 푸는데 걸린 시간: 30분
+- 썩은 오렌지는 1분 후 상하좌우에 위치한 오렌지를 썩게한다.
+- 이때 모든 오렌지가 썩는 데에 걸리는 최소 시간 (분)
+=> 오렌지가 썩는 데 걸리는 시간은 트리의 레벨과 같음 -> 큐에 좌표와 함께 레벨도 저장
+=> 모든 오렌지가 썩는지 -> 신선한 오렌지의 개수 필요
+'''
