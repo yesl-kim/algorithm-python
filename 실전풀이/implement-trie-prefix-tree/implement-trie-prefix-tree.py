@@ -9,35 +9,36 @@ class Trie:
     def __init__(self):
         self.root = Node()
 
-    def insert(self, word: str) -> None:
+
+    def find(self, s: str) -> Node:
         node = self.root
-        for char in word:
+        for char in s:
             if not char in node.next:
-                node.next[char] = Node()
+                raise Exception(node, char)
             node = node.next[char]
-        node.isEnd = True
+        return node
+    
+
+    def insert(self, word: str) -> None:
+        while True:
+            try:
+                self.find(word).isEnd = True
+                return
+            except Exception as error:
+                node, char = error.args
+                node.next[char] = Node()
 
         
     def search(self, word: str) -> bool:
-        node = self.root
-        for char in word:
-            if not char in node.next:
-                return False
-            node = node.next[char]
-        return node.isEnd
+        try:
+            return self.find(word).isEnd
+        except:
+            return False
         
 
     def startsWith(self, prefix: str) -> bool:
-        node = self.root
-        for char in prefix:
-            if not char in node.next:
-                return False
-            node = node.next[char]
-        return True
-
-
-# Your Trie object will be instantiated and called as such:
-# obj = Trie()
-# obj.insert(word)
-# param_2 = obj.search(word)
-# param_3 = obj.startsWith(prefix)
+        try:
+            self.find(prefix)
+            return True
+        except:
+            return False
