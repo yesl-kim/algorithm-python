@@ -9,13 +9,17 @@ class ListNode:
         
 class Solution:
     def up(self, node: ListNode):
-        if node.val < 10:
+        if not node:
             return
-        next_val, node.val = divmod(node.val, 10)
-        if node.next:
-            node.next.val += next_val
-        else:
-            node.next = ListNode(next_val)
+        
+        if node.val >= 10:
+            next_val, node.val = divmod(node.val, 10)
+            if node.next:
+                node.next.val += next_val
+            else:
+                node.next = ListNode(next_val)
+        self.up(node.next)
+        
                 
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
         head = node = ListNode() # placeholder
@@ -31,11 +35,7 @@ class Solution:
         if n2:
             node.next = n2
         
-        node = head.next
-        while node:
-            self.up(node)
-            node = node.next
-        
+        self.up(head.next)
         return head.next
     
 
