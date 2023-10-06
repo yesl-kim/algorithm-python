@@ -1,4 +1,5 @@
 # https://leetcode.com/problems/add-two-numbers
+from typing import Optional
 
 # Definition for singly-linked list.
 class ListNode:
@@ -10,24 +11,38 @@ class Solution:
     def up(self, node: ListNode):
         if node.val < 10:
             return
-        node.val, next_val = node.val % 10, node.val // 10
+        next_val, node.val = divmod(node.val, 10)
         if node.next:
             node.next.val += next_val
         else:
             node.next = ListNode(next_val)
                 
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        head = node = ListNode() # placeholder
         n1, n2 = l1, l2
         while n1 and n2:
-            if not n1.next and n2.next:
-                n1.next, n2.next = n2.next, n1.next
-            
-            n1.val += n2.val
-            self.up(n1)
+            node.next = ListNode(n1.val + n2.val)
+            node = node.next
             n1, n2 = n1.next, n2.next
         
-        while n1:
-            self.up(n1)
-            n1 = n1.next
+        if n1:
+            node.next = n1
+
+        if n2:
+            node.next = n2
         
-        return l1
+        node = head.next
+        while node:
+            self.up(node)
+            node = node.next
+        
+        return head.next
+    
+
+s = Solution()
+n1 = ListNode(2, ListNode(4, ListNode(3)))
+n2 = ListNode(5, ListNode(6, ListNode(4)))
+node = s.addTwoNumbers(n1, n2)
+while node:
+    print(node.val, end='')
+    node = node.next
