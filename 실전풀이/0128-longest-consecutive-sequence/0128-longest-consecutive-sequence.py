@@ -1,4 +1,5 @@
 # https://leetcode.com/problems/longest-consecutive-sequence/
+from typing import List
 
 class Solution:
     def length(self, sequence):
@@ -14,4 +15,8 @@ class Solution:
         
         if not sequences:
             return 0
-        return self.length(max(sequences.values(), key=self.length))
+        return max(map(self.length, sequences.values()))
+
+nums = [0,3,7,2,5,8,4,6,0,1]
+s = Solution()
+print(s.longestConsecutive(nums))
