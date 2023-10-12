@@ -14,11 +14,13 @@ def solution(s: str) -> List[str]:
     first = ranges.pop(0) # 🤔
     merged = [(first[0], first[-1])]
     for r in ranges:
-        start, end = merged[-1]
+        start, end = merged.pop()
         if r[0] < end:
-            merged[-1] = (start, max(r[-1], end))
+            end = max(end, r[-1])
+            merged.append((start, end))
         else:
-            merged.append([r[0], r[-1]])
+            merged.append((start, end))
+            merged.append((r[0], r[-1]))
 
     # 부분문자열로 반환
     substrings = []
