@@ -1,21 +1,26 @@
 # https://leetcode.com/problems/frog-jump/
+from typing import List
+
+def memoize(fn):
+    cache = {}
+    def wrapper(*args):
+        key = tuple(args)
+        if not key in cache:
+            cache[key] = fn(*args)
+        return cache[key]
+    return wrapper
+
 
 class Solution:
     def canCross(self, stones: List[int]) -> bool:
-        memo = {}
-        def can_jump(pos, step) -> bool:
-            stone = pos + step
-            if (pos, step) in memo:
-                return memo[(pos, step)]
-            
-            if stone == stones[-1]:
+        @memoize
+        def can_jump(pos, step):
+            if pos == stones[-1]:
                 return True
-            if stone > stones[-1] or not stone in stones:
-                memo[(pos, step)] = False
+            
+            if pos > stones[-1] or not pos in stones:
                 return False
             
-            res = any(can_jump(stone, k) for k in range(step-1, step +2) if 0 < k)
-            memo[(pos, step)] = res
-            return res
+            return any(can_jump(pos+step, k) for k in range(step-1, step+2) if 0<k)
         
         return can_jump(0, 1)
