@@ -3,28 +3,28 @@
 from typing import List
 from itertools import product
 
+# 오답: n=4, "(())(())" 누락
 class Solution:
-    def isValid(self, s: str) -> bool:
-        opens=[]
-
-        for x in s:
-            if x == '(':
-                opens.append(x)
-            else:
-                if not opens:
-                    return False
-                opens.pop()
-
-        return len(opens) == 0
-
     def generateParenthesis(self, n: int) -> List[str]:
-        pairs = ('((', '()', '))', ')(')
-        def generate(n):
-            if n <= 1:
-                return pairs
-            return (p1 + p2 for p1, p2 in product(pairs, generate(n-1)))
+        if not n:
+            return ['']
+        return set(sum([['()'+p, '('+p+')', p+'()'] for p in self.generateParenthesis(n-1)], start=[]))
+    
 
-        return [parenthesis for parenthesis in generate(n) if self.isValid(parenthesis)]
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        def generate(o, c):
+            if not o and not c:
+                return ['']
+            
+            parenthese = []
+            if 0 < o:
+                parenthese += ['('+p for p in generate(o-1, c)]
+            if o < c and 0 < c:
+                parenthese += [')'+p for p in generate(o, c-1)]
+            return parenthese
+        return generate(n, n)
 
+        
 s = Solution()
 print(s.generateParenthesis(3))
