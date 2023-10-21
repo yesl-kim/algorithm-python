@@ -15,14 +15,12 @@ class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
         def generate(o, c):
             if not o and not c:
-                return ['']
+                yield ''
             
-            parenthese = []
             if 0 < o:
-                parenthese += ['('+p for p in generate(o-1, c)]
+                yield from ['('+p for p in generate(o-1, c)]
             if o < c and 0 < c:
-                parenthese += [')'+p for p in generate(o, c-1)]
-            return parenthese
+                yield from [')'+p for p in generate(o, c-1)]
         return generate(n, n)
 
         
