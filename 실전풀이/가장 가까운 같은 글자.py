@@ -2,10 +2,8 @@ def solution(s):
     res = []
     last_index = {}
     for i, x in enumerate(s):
-        try:
-            res.append(i - last_index[x])
-        except:
-            res.append(-1)
+        j = last_index.get(x, i + 1)
+        res.append(i - j)
         last_index[x] = i
     return res
 
