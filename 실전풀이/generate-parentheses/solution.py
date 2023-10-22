@@ -18,10 +18,10 @@ class Solution:
                 yield ''
             
             if 0 < o:
-                yield from ['('+p for p in generate(o-1, c)]
+                yield from ('('+p for p in generate(o-1, c))
             if o < c and 0 < c:
-                yield from [')'+p for p in generate(o, c-1)]
-        return generate(n, n)
+                yield from (')'+p for p in generate(o, c-1))
+        return list(generate(n, n))
 
         
 s = Solution()
