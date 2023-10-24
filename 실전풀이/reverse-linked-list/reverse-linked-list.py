@@ -11,20 +11,34 @@ class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         def recur(node):
             if not node.next:
-                new_head = ListNode(0, ListNode(node.val))
-                return new_head.next, new_head
+                return node, node
             
-            next, head = recur(node.next)
-            cur = ListNode(node.val)
-            next.next = cur
-            return cur, head
+            head, tail = recur(node.next)
+            tail.next = node
+            return head, node
         
-        _, new_head = recur(head)
-        return new_head.next
+        head, tail = recur(head)
+        tail.next = None
+        return head
+
+# class Solution:
+#     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+#         def recur(node):
+#             if not node.next:
+#                 new_head = ListNode(0, ListNode(node.val))
+#                 return new_head.next, new_head
+            
+#             next, head = recur(node.next)
+#             cur = ListNode(node.val)
+#             next.next = cur
+#             return cur, head
+        
+#         _, new_head = recur(head)
+#         return new_head.next
 
 s = Solution()
-# head = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
-head = ListNode()
+head = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
+# head = ListNode()
 ans = s.reverseList(head)
 while ans:
     print(ans.val)
