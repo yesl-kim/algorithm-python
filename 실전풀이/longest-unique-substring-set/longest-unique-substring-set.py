@@ -10,17 +10,25 @@ def solution(s: str) -> List[str]:
         indices[char].append(i)
     
     # merge
+    # ranges = sorted(indices.values(), key=lambda x: x[0])
+    # merged = [(0, ranges.pop(0)[-1])]
+    # for r in ranges:
+    #     start, end = merged.pop()
+    #     if r[0] <= end:
+    #         end = max(end, r[-1])
+    #     merged.append((start, end))
+    #     if r[0] > end:
+    #         merged.append((r[0], r[-1]))
+    
     ranges = sorted(indices.values(), key=lambda x: x[0])
-    first = ranges.pop(0) # 🤔
-    merged = [(first[0], first[-1])]
-    for r in ranges:
-        start, end = merged.pop()
-        if r[0] < end:
-            end = max(end, r[-1])
-            merged.append((start, end))
+    merged = [(0, ranges.pop(0)[-1])]
+    for cur in ranges:
+        prev = merged.pop()
+        if cur[0] <= prev[1]:
+            r = [(prev[0], max(cur[-1], prev[1]))]
         else:
-            merged.append((start, end))
-            merged.append((r[0], r[-1]))
+            r = [prev, (cur[0], cur[-1])]
+        merged += r
 
     # 부분문자열로 반환
     substrings = []
@@ -28,6 +36,18 @@ def solution(s: str) -> List[str]:
         substrings.append(s[start: end+1])
     return substrings
 
+
+
+def solution2(s: str) -> List[str]:
+    last_index = {x: i for i, x in enumerate(s)}
+    subs = []
+    start, end = 0, last_index[s[0]]
+    for i, x in enumerate(s):
+        if i <= end:
+            end = max(end, last_index[x])
+        else:
+            subs.append(s[start: end+1])
+            start, end = i, last_index[x]
     
 
 
