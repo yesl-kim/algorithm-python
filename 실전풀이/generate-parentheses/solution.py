@@ -8,10 +8,10 @@ class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
         if not n:
             return ['']
-        return set(sum([['()'+p, '('+p+')', p+'()'] for p in self.generateParenthesis(n-1)], start=[]))
+        return set(sum((['()'+p, '('+p+')', p+'()'] for p in self.generateParenthesis(n-1)), start=[]))
     
 
-class Solution:
+class Solution2:
     def generateParenthesis(self, n: int) -> List[str]:
         def generate(o, c):
             if not o and not c:
