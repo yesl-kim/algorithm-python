@@ -10,25 +10,15 @@ def solution(s: str) -> List[str]:
         indices[char].append(i)
     
     # merge
-    # ranges = sorted(indices.values(), key=lambda x: x[0])
-    # merged = [(0, ranges.pop(0)[-1])]
-    # for r in ranges:
-    #     start, end = merged.pop()
-    #     if r[0] <= end:
-    #         end = max(end, r[-1])
-    #     merged.append((start, end))
-    #     if r[0] > end:
-    #         merged.append((r[0], r[-1]))
-    
-    ranges = sorted(indices.values(), key=lambda x: x[0])
-    merged = [(0, ranges.pop(0)[-1])]
-    for cur in ranges:
-        prev = merged.pop()
-        if cur[0] <= prev[1]:
-            r = [(prev[0], max(cur[-1], prev[1]))]
-        else:
-            r = [prev, (cur[0], cur[-1])]
-        merged += r
+    ranges = sorted(((x[0], x[-1]) for x in indices.values()), key=lambda x: x[0])
+    merged = [(0, ranges.pop(0)[1])]
+    for start, end in ranges:
+        prev_start, prev_end = merged.pop()
+        new_end = max(prev_end, end) if start <= prev_end else prev_end
+        merged.append((prev_start, new_end))
+        
+        if prev_end < start:
+            merged.append((start, end))
 
     # 부분문자열로 반환
     substrings = []
@@ -64,4 +54,5 @@ for i, input in enumerate(inputs):
         print(f"output: {o}")
         print(f"expected: {e}")
         break
-print('success')
+else:
+    print('success')
