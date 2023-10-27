@@ -3,12 +3,17 @@
 from typing import List
 from itertools import product
 
+def chain(*iterables):
+    for it in iterables:
+        for i in it:
+            yield from i
+
 # 오답: n=4, "(())(())" 누락
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
         if not n:
             return ['']
-        return set(sum((['()'+p, '('+p+')', p+'()'] for p in self.generateParenthesis(n-1)), start=[]))
+        return chain({'()'+p, '('+p+')', p+'()'} for p in self.generateParenthesis(n-1))
     
 
 class Solution2:
@@ -25,4 +30,7 @@ class Solution2:
 
         
 s = Solution()
-print(s.generateParenthesis(3))
+g = s.generateParenthesis(3)
+print(g)
+for i in g:
+    print(i)
