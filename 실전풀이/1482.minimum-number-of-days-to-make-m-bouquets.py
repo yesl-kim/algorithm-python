@@ -2,6 +2,9 @@ from typing import List
 
 class Solution:
     def minDays(self, bloomDay: List[int], m: int, k: int) -> int:
+        if len(bloomDay) < m * k:
+            return -1
+        
         def check(x):
             bouquets = 0
             flowers = 0
