@@ -4,19 +4,14 @@ class Solution:
         oc = 0
         cc = 0
         for x in s:
-            if x.isalpha():
-                ns += x
+            if x == ')' and oc <= cc:
                 continue
-                
+            
+            ns += x
             if x == '(':
-                ns += x
                 oc += 1
-            elif oc > cc:
-                ns += x
+            elif x == ')':
                 cc += 1
-        
-        if oc == cc:
-            return ns
         
         s, ns = ns, ''
         oc = 0
@@ -28,4 +23,3 @@ class Solution:
                 ns += x
                 oc += 1
         return ns
-                
