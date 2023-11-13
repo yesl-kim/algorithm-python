@@ -11,8 +11,9 @@ class Solution:
             for day in bloomDay:
                 if day <= x:
                     flowers += 1
+                    b, flowers = divmod(flowers, k)
+                    bouquets += b
                 else:
-                    bouquets += (flowers // k)
                     flowers = 0
             
             bouquets += (flowers // k)
@@ -32,10 +33,9 @@ class Solution:
         return res if res else -1
     
 
-# m = 3
-m = 1
-k = 1
-# k = 2
 # bloomDay = [1, 10, 3, 10, 2]
-bloomDay = [1000000000,1000000000]
+# bloomDay = [1000000000,1000000000]
+bloomDay = [7,7,7,7,12,7,7]
+m = 2
+k = 3
 print('=>', Solution().minDays(bloomDay, m, k))
